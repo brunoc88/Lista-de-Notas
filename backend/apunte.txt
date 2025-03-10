@@ -1,0 +1,36 @@
+ formas de postear en vez de usar el metodo save,
+ ya que en save tenemos que hacer una instancia del objeto
+ 
+ 
+ // Usando create() para crear y guardar el documento en un solo paso
+    Note.create({
+        nota: nota,
+        fecha: fecha
+    })
+    .then(result => res.status(201).json(result))
+    .catch(error => next(error));
+
+    app.post('/nota/alta', (req, res, next) => {
+    const { nota, fecha } = req.body;
+
+    if (!nota || !fecha) {
+        return res.status(400).json('Faltan propiedades');
+    }
+
+    Note.create(req.body)
+        .then(result => res.status(201).json(result))
+        .catch(error => next(error));
+});
+
+app.post('/nota/alta', (req, res, next) => {
+    const { nota, fecha } = req.body;
+
+    if (!nota || !fecha) {
+        return res.status(400).json('Faltan propiedades');
+    }
+
+    Note.create({ nota, fecha })
+        .then(result => res.status(201).json(result))
+        .catch(error => next(error));
+});
+

@@ -1,0 +1,21 @@
+como usar standar js
+
+instalamos la dependencia 
+
+npm install standard --save-dev
+
+npx run standard //para mostrar errores
+
+npx run standard fix //para corregirlos
+
+Configuracion en package.json
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "standard",         
+    "lint:fix": "standard --fix" 
+},
+
+para evitar tener que escribrir todo el tiempo npx etc..

@@ -1,0 +1,21 @@
+
+GET http://localhost:3000/notas
+
+###
+DELETE http://localhost:3000/nota/borrar/67cf08941bf9774759d637e6
+
+###
+POST http://localhost:3000/notas/alta
+Content-Type: application/json
+
+{
+    "nota": "Pasar siempre {datos} en un post!"
+}
+
+###
+PUT http://localhost:3000/notas/actualizar/67cf0c3d2036e1ad7a39a62c
+Content-Type: application/json
+
+{
+    "nota": "funciona?, claro que si!"
+}
