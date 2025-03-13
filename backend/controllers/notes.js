@@ -19,12 +19,13 @@ noteRouter.post('/notas/alta', (req, res, next) => {
     .catch(error => next(error))
 })
 
-noteRouter.get('/notas', (req, res, next) => {
-  Note.find({})
-    .then(result => {
-      return res.status(200).json(result)
-    })
-    .catch(error => next(error))
+noteRouter.get('/notas', async (req, res, next) => {
+  try {
+    const notes = await Note.find({});
+    return res.status(200).json(notes);
+  } catch (error) {
+    next(error);
+  }
 })
 
 noteRouter.delete('/notas/borrar/:id', (req, res, next) => {
