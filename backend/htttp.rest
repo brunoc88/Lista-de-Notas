@@ -9,7 +9,7 @@ POST http://localhost:3000/notas/alta
 Content-Type: application/json
 
 {
-    "nota": "Pasar siempre {datos} en un post!"
+    "nota": "F1 Start tomorrow!"
 }
 
 ###

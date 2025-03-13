@@ -1,30 +1,32 @@
 const noteRouter = require('express').Router()
 const Note = require('../models/notes')
 
-noteRouter.post('/notas/alta', (req, res, next) => {
-  const { nota } = req.body
-  if (!nota) {
-    return res.status(400).json('Campo vacío')
+noteRouter.post('/notas/alta', async (req, res, next) => {
+  try {
+    const { nota } = req.body
+    if (!nota) {
+      return res.status(400).json('bad request')
+    }
+    const fecha = new Date()
+
+    const note = new Note({
+      nota,
+      fecha
+    })
+
+    const response = await note.save()
+    return res.status(201).json(response)
+  } catch (error) {
+    next(error)
   }
-
-  const fecha = new Date()
-
-  const note = new Note({
-    nota,
-    fecha
-  })
-
-  note.save()
-    .then(result => res.status(201).json(result))
-    .catch(error => next(error))
 })
 
 noteRouter.get('/notas', async (req, res, next) => {
   try {
-    const notes = await Note.find({});
-    return res.status(200).json(notes);
+    const notes = await Note.find({})
+    return res.status(200).json(notes)
   } catch (error) {
-    next(error);
+    next(error)
   }
 })
 
