@@ -2,7 +2,7 @@
 GET http://localhost:3000/notas
 
 ###
-DELETE http://localhost:3000/nota/borrar/67cf08941bf9774759d637e6
+DELETE http://localhost:3000/notas/borrar/67d34e6031b2f53b9ab65466
 
 ###
 POST http://localhost:3000/notas/alta

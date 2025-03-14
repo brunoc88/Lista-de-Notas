@@ -14,8 +14,8 @@ noteRouter.post('/notas/alta', async (req, res, next) => {
       fecha
     })
 
-    const response = await note.save()
-    return res.status(201).json(response)
+    const savedNote = await note.save()
+    return res.status(201).json(savedNote)
   } catch (error) {
     next(error)
   }
@@ -30,12 +30,20 @@ noteRouter.get('/notas', async (req, res, next) => {
   }
 })
 
-noteRouter.delete('/notas/borrar/:id', (req, res, next) => {
-  const id = req.params.id
+noteRouter.delete('/notas/borrar/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
 
-  Note.findByIdAndDelete(id)
-    .then(result => res.status(204).end())
-    .catch(error => next(error))
+    const findNote = await Note.findById(id)
+
+    if (!findNote) {
+      return res.status(404).json({ error: 'No Found' })
+    }
+    await Note.findByIdAndDelete(id)
+    return res.status(204).end()
+  } catch (error) {
+    next(error)
+  }
 })
 
 noteRouter.put('/notas/actualizar/:id', (req, res, next) => {
